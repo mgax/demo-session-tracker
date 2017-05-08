@@ -94,3 +94,8 @@ def test_bad_action(client):
     info = {'ip': '8.8.8.8', 'resolution': {'width': 200, 'height': 100}}
     resp = _call_api(client, 'something-else', info)
     assert resp.status_code == 404
+
+def test_missing_field(client):
+    info = {'ip': '8.8.8.8', 'resolution': {'foo': 'bar'}}
+    resp = _call_api(client, 'login', info)
+    assert resp.status_code == 400

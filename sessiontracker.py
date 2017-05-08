@@ -45,7 +45,7 @@ def track(action):
 
     (info, errors) = SessionAction().load(flask.request.get_json())
     if errors:
-        return flask.jsonify({'errors': errors}), 422
+        return flask.jsonify({'errors': errors}), 400
 
     logger.info("Track: %r %r", action, info)
 
