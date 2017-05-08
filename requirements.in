@@ -1,0 +1,5 @@
+pip-tools
+Flask
+pytest
+pytest-flask
+responses
