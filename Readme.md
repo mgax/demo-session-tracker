@@ -7,6 +7,15 @@ API spec: [swagger.yaml](docs/swagger.yaml)
 * Install dependencies: `pip install -r requirements.txt`
 
 ### Development
+Run the test suite:
+```shell
+$ pytest
+```
+
 Dependencies are tracked using
 [pip-tools](https://github.com/jazzband/pip-tools). To add a new dependency,
-add it to `requirements.in`, then run `pip-compile` and `pip-sync`.
+add it to `requirements.in`, then run:
+```shell
+$ pip-compile
+$ pip-sync
+```
