@@ -23,10 +23,10 @@ def test_homepage(client):
     assert resp.text == 'hi'
 
 @responses.activate
-def test_login(client):
+def _call_api(client, action, info):
     def call_app(request):
         resp = client.post(
-            '/track/login',
+            '/track/{}'.format(action),
             data=request.body,
             content_type='application/json',
         )
@@ -34,13 +34,19 @@ def test_login(client):
 
     responses.add_callback(
         responses.POST,
-        'http://example.com/track/login',
+        'http://example.com/track/{}'.format(action),
         callback=call_app,
     )
 
+    return requests.post(
+        'http://example.com/track/{}'.format(action),
+        json=info,
+    )
+
+def test_login(client):
     info = {'ip': '8.8.8.8', 'resolution': {'width': 200, 'height': 100}}
     expected_location = {}
-    resp = requests.post('http://example.com/track/login', json=info)
+    resp = _call_api(client, 'login', info)
     assert resp.json() == {
         'action': 'login',
         'info': info,
