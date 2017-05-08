@@ -3,6 +3,8 @@ import flask
 from marshmallow import Schema, fields
 import requests
 
+ACTIONS = ['login', 'logout', 'buy', 'review', 'shopping-cart']
+
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 app = flask.Flask(__name__)
@@ -38,6 +40,9 @@ def geolocate(ip):
 
 @app.route('/track/<action>', methods=['POST'])
 def track(action):
+    if action not in ACTIONS:
+        flask.abort(404)
+
     (info, errors) = SessionAction().load(flask.request.get_json())
     if errors:
         return flask.jsonify({'errors': errors}), 422

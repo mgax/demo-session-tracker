@@ -89,3 +89,8 @@ def test_login(client):
         'info': info,
         'location': RESP_LOCATION,
     }
+
+def test_bad_action(client):
+    info = {'ip': '8.8.8.8', 'resolution': {'width': 200, 'height': 100}}
+    resp = _call_api(client, 'something-else', info)
+    assert resp.status_code == 404
