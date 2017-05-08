@@ -75,7 +75,14 @@ def _call_api(client, action, info):
     )
 
 def test_login(client):
-    info = {'ip': '8.8.8.8', 'resolution': {'width': 200, 'height': 100}}
+    info = {
+        'ip': '8.8.8.8',
+        'browser': 'chrome',
+        'browser_version': '58.0.3029.96',
+        'os': 'OSX',
+        'os_version': '10.11.6',
+        'resolution': {'width': 200, 'height': 100},
+    }
     resp = _call_api(client, 'login', info)
     assert resp.json() == {
         'action': 'login',

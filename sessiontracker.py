@@ -17,6 +17,10 @@ class Resolution(Schema):
 
 class SessionAction(Schema):
     ip = fields.Str(required=True)
+    browser = fields.Str(required=True)
+    browser_version = fields.Str()
+    os = fields.Str()
+    os_version = fields.Str()
     resolution = fields.Nested(Resolution, required=True)
 
 def geolocate(ip):
